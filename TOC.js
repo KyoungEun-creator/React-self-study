@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 
 class TOC extends Component {
+  shouldComponentUpdate(newProps, newState){    //performance개선 위해
+    if (this.props.data === newProps.data) {
+      return false;                             //render 호출 X
+    } else {
+      return true;                              //render 호출 O
+    }
+  }
     render () {
       var list=[];
       var data=this.props.data;

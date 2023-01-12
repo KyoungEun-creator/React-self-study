@@ -8,7 +8,10 @@ class CreateContent extends Component {
           <form action="/create_process" method="post"                         
             onSubmit={function(e){
               e.preventDefault();
-              alert('submit')
+              this.props.onSubmit(
+                e.target.title.value,
+                e.target.desc.value
+              );
             }.bind(this)}>
             <p><input type="text" name="title" placeholder="title"></input></p>
             <textarea name="desc" placeholder="description"></textarea>         {/* 입력할 텍스트가 여러 줄일 때 사용 */}
