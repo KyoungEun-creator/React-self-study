@@ -1,22 +1,51 @@
 import React, { Component } from 'react';
 
 class UpdateContent extends Component {
-    render () {
+  constructor(props){
+    super(props);
+    this.state = {
+      id:this.props.data.id,
+      title:this.props.data.title,
+      desc:this.props.data.desc
+    }
+    this.inputFormHandler = this.inputFormHandler.bind(this);   //.bind(this) 중복 않기 위해
+  }
+
+    inputFormHandler(e){                     //onChange 중복 피하기 위해
+      this.setState({[e.target.name]:e.target.value});
+    }
+    render() {
       console.log(this.props.data);
       console.log('UpdateContent render');
       return (
         <article>
-          <h2>Update</h2>                                                      {/* action:사용자가 입력한 정보 전송할 장소, method:url에 노출 안 되도록*/}
+          <h2>Update</h2>                                 {/* action:사용자가 입력한 정보 전송할 장소, method:url에 노출 안 되도록*/}
           <form action="/create_process" method="post"                         
             onSubmit={function(e){
               e.preventDefault();
               this.props.onSubmit(
-                e.target.title.value,
-                e.target.desc.value
-              );
+                this.state.id,
+                this.state.title,
+                this.state.desc 
+              ); 
             }.bind(this)}>
-            <p><input type="text" name="title" placeholder="title"></input></p>
-            <textarea name="desc" placeholder="description"></textarea>         {/* 입력할 텍스트가 여러 줄일 때 사용 */}
+
+            <input type="hidden" name="id" value={this.state.id}></input>
+            <p>
+              <input 
+                type="text" 
+                name="title" 
+                placeholder="title"
+                value={this.state.title}
+                onChange={this.inputFormHandler}          
+              ></input>
+            </p>
+            <textarea                                    
+              onChange={this.inputFormHandler}
+              name="desc" 
+              placeholder="description" 
+              value={this.state.desc}>
+            </textarea>        
             <p><input type="submit"></input></p>
           </form>
         </article>
