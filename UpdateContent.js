@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 
-class CreateContent extends Component {
+class UpdateContent extends Component {
     render () {
-      console.log('CreateContent render');
+      console.log(this.props.data);
+      console.log('UpdateContent render');
       return (
         <article>
-          <h2>Create</h2>                                                      {/* action:사용자가 입력한 정보 전송할 장소, method:url에 노출 안 되도록*/}
+          <h2>Update</h2>                                                      {/* action:사용자가 입력한 정보 전송할 장소, method:url에 노출 안 되도록*/}
           <form action="/create_process" method="post"                         
             onSubmit={function(e){
               e.preventDefault();
@@ -23,4 +24,4 @@ class CreateContent extends Component {
     }
   }
 
-export default CreateContent;
+export default UpdateContent;
